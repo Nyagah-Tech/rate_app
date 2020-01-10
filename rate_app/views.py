@@ -10,5 +10,9 @@ def home(request):
 def logout_view(request):
     logout(request)
     return redirect('/')
+
+@login_required
+def post_project(request):
+    
     
 # Create your views here.
