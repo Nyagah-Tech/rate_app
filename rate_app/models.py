@@ -20,3 +20,10 @@ class Reviews(models.Model):
     posted_on = models.DateTimeField(auto_now_add=True)
     project_id = models.ForeignKey(Project_Post,on_delete=models.CASCADE)
     
+
+class Rates(models.Model):
+    rate = models.IntegerField(default = 0)
+    rate_by = models.ForeignKey(User,on_delete=models.CASCADE)
+    rate_on = models.DateTimeField(auto_now_add=True)
+    project_id = models.ForeignKey(Project_Post,on_delete=models.CASCADE)
+    
