@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django import forms
-from .models import Rates,Reviews
+from .models import Project_Post,Reviews
 
 class ReveiwForm(forms.ModelForm):
     class Meta:
@@ -11,4 +11,10 @@ class ReveiwForm(forms.ModelForm):
             'project_id',
         ]
 
-class 
+class Post_projectform(forms.ModelForm):
+    class Meta:
+        model = Project_Post
+        exclude=[
+            'posted_by',
+            'updated_on',
+        ]
