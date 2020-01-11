@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django import forms
-from .models import Project_Post,Reviews
+from .models import Project_Post,Reviews,Profile
 
 class ReveiwForm(forms.ModelForm):
     class Meta:
@@ -18,3 +18,19 @@ class Post_projectform(forms.ModelForm):
             'posted_by',
             'updated_on',
         ]
+
+class UpdateProfile(forms.ModelForm):
+    class Meta:
+        model = Profile
+        exclude=[
+            'updated_on',
+            'user',
+        ]
+class UserUpdateform(forms.ModelForm):
+    email = forms.EmailField()
+    class Meta:
+        model = User
+        fields = [
+            'username',
+            'email',
+        ]   
