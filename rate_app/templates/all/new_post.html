@@ -1,10 +1,10 @@
 {%extends 'all/base.html'%}
-{% load boostrap4%}
-{%load static%}
+{% load bootstrap4%}
+{% load staticfiles %}
 {% block content %}
     <div class="container">
         <div class="card">
-           <form action="post-project" method="POST">
+           <form action="{%url 'post-project'%}" method="POST" enctype="multipart/form-data">
                 {%csrf_token%}
                 {%bootstrap_form form%}
             <input type="submit" class="btn btn primary" value="Post">
