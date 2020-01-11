@@ -15,11 +15,18 @@ class Project_Post(models.Model):
     project_url = models.URLField()
     description = HTMLField()
     posted_on = models.DateTimeField(auto_now_add=True)
+    title = models.CharField(max_length=100,blank=True)
     
     
     def get_all_projects():
         projects = Project_Post.objects.all()
         return projects
+    
+    @classmethod
+    def get_project_by_id(cls,id):
+        project = Project_Post.objects.filter(id=id)
+        
+        return project
         
 
 class Reviews(models.Model):
@@ -28,10 +35,16 @@ class Reviews(models.Model):
     posted_on = models.DateTimeField(auto_now_add=True)
     project_id = models.ForeignKey(Project_Post,on_delete=models.CASCADE)
     
+    
+   
+    
 
 class Rates(models.Model):
-    rate = models.IntegerField(default = 0)
+    design = models.IntegerField(default = 0)
     rate_by = models.ForeignKey(User,on_delete=models.CASCADE)
     rate_on = models.DateTimeField(auto_now_add=True)
     project_id = models.ForeignKey(Project_Post,on_delete=models.CASCADE)
+    content = models.IntegerField(default = 0)
+    usability = models.IntegerField(default = 0)
     
+   
