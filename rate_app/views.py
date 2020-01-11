@@ -3,11 +3,13 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from .forms import Post_projectform
 from django.contrib import messages
+from .models import Project_Post,Profile,Reviews
 
 
 @login_required(login_url='/accounts/login/')
 def home(request):
-    return render(request,"all/index.html")
+    projects = Project_Post.get_all_projects()
+    return render(request,"all/index.html",{"projects":projects})
 
 def logout_view(request):
     logout(request)
@@ -29,7 +31,7 @@ def post_project_view(request):
     
     else:
         form = Post_projectform()
-        return render(request,'all/new_post.html',{"form":form})
+    return render(request,'all/new_post.html',{"form":form})
     
 
             
