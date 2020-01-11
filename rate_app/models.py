@@ -10,8 +10,10 @@ class Profile(models.Model):
     updated_on = models.DateTimeField(auto_now_add=True)
 
 class Project_Post(models.Model):
-    user = models.OneToOneField(User, on_delete = models.CASCADE)
+    posted_by = models.ForeignKey(User,on_delete=models.CASCADE)
     img_project = models.ImageField(upload_to="project/")
+    project_url = models.URLField()
+    description = HTMLField()
     posted_on = models.DateTimeField(auto_now_add=True)
 
 class Reviews(models.Model):
