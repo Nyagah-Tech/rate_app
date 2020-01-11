@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
-from .forms import Post_projectform,ReveiwForm
+from .forms import Post_projectform,ReveiwForm,UpdateProfile,UserUpdateform
 from django.contrib import messages
 from .models import Project_Post,Profile,Reviews,Rates
 
@@ -90,6 +90,19 @@ def post_rate_view(request,id):
         messages.info(request,'all fields are required')
         return redirect('post-review',id)
         
-
-            
+@login_required
+def update_profile_view(request,id):
+    if request.method =='POST':
+        form = UpdateProfile(request.POST,request.FILES,instance=request.user.profile)
+        userform = UserUpdateform(request.POST,instance=request.user)
+        
+        if form.is_valid() and userform.is_valid():
+            form.save()
+            userform.save()
+            return redirect('profile')
+    else:
+        form = UpdateProfile(instance=request.user.profile)
+        userform = UserUpdateform(instance=request.user)
+    return render(request,"all/update_profile.html",{"form":form,"userform":userform})
+        
     
