@@ -1,0 +1,109 @@
+{%load staticfiles%}
+{% load bootstrap4%}
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+
+<div class="container">
+    <div class="row">
+        {% for proj in project%}
+        <div class="col-md-6">
+            <div class="card" style="margin-top: 25px;">
+                <h3 class="text-center" style="margin-top: 20px;">title</h3>
+                <img src="{{proj.img_project.url}}" alt="title" style="width: 100%; height: 100%;"
+                    class="img-responsive">
+                <div class="details" style="text-align: center; margin-top: 15px;">
+                    <p>reviews {{reviews.count}}</p>
+                    <p>design ratings:::{{design}}%</p>
+                    <p>usability ratings:::{{usability}}%</p>
+                    <p>content ratings:::{{content}}%</p>
+                    <p class="panel">{{proj.description}}</p>
+                    <p class="text-center"><i>Posted by </i><b>{{proj.posted_by}}</b><i> on</i> {{proj.posted_on}}</p>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-6">
+            <div class="review" style="margin-top: 90px; margin-left: 45px;">
+                <form action="post/{{proj.id}}" method="POST">
+                    {%csrf_token%}
+                    {%bootstrap_form form%}
+                    <input type="submit" value="Post">
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="row" style="margin-top: 30px;">    
+        <div class="col-md-6" style=" width: 100%; height:400px !important; overflow: auto;">
+            <h2 class="text-center" style="margin-top: 30px;"><b>Reviews</b></h2><br>
+            {%for review in reviews%}
+            <div class="card">
+                <p>{{review.review}}</p>
+                <p class="text-center"><i>Posted on </i><b>{{review.posted_on}}</b><br> <i>by</i><b>
+                        {{review.posted_by}}</b></p>
+            </div>
+            {%endfor%}
+        </div>
+        <div class="col-md-6">
+           <h2 class="text-center">Rate our application according its design,usability and content.</h2>
+           <center style="margin-top:40px;">
+
+               <form action="rate/post/{{project_id}}" method="POST">
+                   {%csrf_token%}
+                   <select name="design">
+                       <option name="">Design</option>
+                       <option name="" value="0">0</option>
+                       <option name="" value="1">1</option>
+                       <option name="" value="2">2</option>
+                       <option name="" value="3">3</option>
+                       <option name="" value="4">4</option>
+                       <option name="" value="5">5</option>
+                       <option name="" value="6">6</option>
+                       <option name="" value="7">7</option>
+                       <option name="" value="8">8</option>
+                       <option name="" value="9">9</option>
+   
+                   </select>
+                   <select  name="usability">
+                       <option name="">Usability</option>
+                       <option name="" value="0">0</option>
+                       <option name="" value="1">1</option>
+                       <option name="" value="2">2</option>
+                       <option name="" value="3">3</option>
+                       <option name="" value="4">4</option>
+                       <option name="" value="5">5</option>
+                       <option name="" value="6">6</option>
+                       <option name="" value="7">7</option>
+                       <option name="" value="8">8</option>
+                       <option name="" value="9">9</option>
+   
+                   </select >
+                   <select name="content">
+                       <option name="">Content</option>
+                       <option name="" value="0">0</option>
+                       <option name="" value="1">1</option>
+                       <option name="" value="2">2</option>
+                       <option name="" value="3">3</option>
+                       <option name="" value="4">4</option>
+                       <option name="" value="5">5</option>
+                       <option name="" value="6">6</option>
+                       <option name="" value="7">7</option>
+                       <option name="" value="8">8</option>
+                       <option name="" value="9">9</option>
+   
+                   </select>
+   
+                   <input type="submit" value="Rate">
+                   <div class="message">
+                       {% for message in messages%}
+                           <h3 class="alert-danger">{{message}}</h3>
+                       {% endfor %}
+                   </div>
+               </form>
+           </center>
+        </div>
+    </div>
+</div>
