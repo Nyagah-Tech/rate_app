@@ -54,6 +54,19 @@ def post_review_view(request,id):
         
     return render(request,'all/single_project.html',{"form":form,"reviews":reviews,"project":project,"project_id":id,"design":design,"usability":usability,"content":content})
  
+@login_required   
+def review_post(request,id):
+    if request.method=='POST':
+        form = ReveiwForm(request.POST)
+        
+        if form.is_valid():
+            new_review=form.save(commit=False)
+            new_review.posted_by = request.user
+            project = Project_Post.objects.get(id=id)
+            new_review.project_id = project
+            new_review.save()
+            return redirect('post-review',id)
+
 
             
     
