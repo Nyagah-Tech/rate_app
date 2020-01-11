@@ -47,4 +47,8 @@ class Rates(models.Model):
     content = models.IntegerField(default = 0)
     usability = models.IntegerField(default = 0)
     
-   
+    @classmethod
+    def get_rates_by_project_id(cls,id):
+        projects_rates = cls.objects.filter(project_id = id)
+        
+        return projects_rates
