@@ -36,7 +36,12 @@ class Reviews(models.Model):
     project_id = models.ForeignKey(Project_Post,on_delete=models.CASCADE)
     
     
-   
+    
+    @classmethod
+    def get_review_by_project_id(cls,id):
+        projects = cls.objects.filter(project_id = id)
+        
+        return projects
     
 
 class Rates(models.Model):
