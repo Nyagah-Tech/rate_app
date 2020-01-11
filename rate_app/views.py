@@ -68,5 +68,28 @@ def review_post(request,id):
             return redirect('post-review',id)
 
 
+@login_required
+def post_rate_view(request,id):
+    if request.method=='POST':
+        rates = Rates.get_rates_by_project_id(id)
+        for rate in rates:
+            if rate.rate_by ==request.user:
+                messages.info(request,'You have alraedy rated the project')
+                return redirect('post-review', id)
+        design = request.POST.get('design')
+        usability = request.POST.get('usability')
+        content = request.POST.get('content')
+        
+        if design and usability and content:
+            project = Project_Post.objects.get(id=id)
+            rate = Rates(design = design,usability = usability,content=content,project_id = project,rate_by=request.user)
+            
+            rate.save()
+            return redirect('post-review',id)
+    else:
+        messages.info(request,'all fields are required')
+        return redirect('post-review',id)
+        
+
             
     
