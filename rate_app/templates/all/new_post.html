@@ -1,0 +1,15 @@
+{%extends 'all/base.html'%}
+{% load boostrap4%}
+{%load static%}
+{% block content %}
+    <div class="container">
+        <div class="card">
+           <form action="post-project" method="POST">
+                {%csrf_token%}
+                {%bootstrap_form form%}
+            <input type="submit" class="btn btn primary" value="Post">
+
+           </form> 
+        </div>
+    </div>
+{%endblock%}
