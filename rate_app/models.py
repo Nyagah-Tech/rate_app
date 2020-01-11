@@ -15,6 +15,12 @@ class Project_Post(models.Model):
     project_url = models.URLField()
     description = HTMLField()
     posted_on = models.DateTimeField(auto_now_add=True)
+    
+    
+    def get_all_projects():
+        projects = Project_Post.objects.all()
+        return projects
+        
 
 class Reviews(models.Model):
     review = HTMLField()
