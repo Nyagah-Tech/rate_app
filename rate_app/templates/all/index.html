@@ -1,12 +1,36 @@
+{%load bootstrap4 %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <title>Document</title>
 </head>
+
 <body>
-    <a href="{%url 'post-project%}">post new project</a> 
+    <div class="container">
+        <div class="row">
+            {%for project in projects%}
+            <div class="col-md-4">
+
+                <div class="card">
+                    <h3 class="text-center">title</h3>
+                    <img src="{{project.img_project.url}}" alt="title" class="img-responsive" style="width:350px;height:250px">
+                    <div class="details">
+                        <p>{{project.description}}</p>
+                        <p class="text-center"><i>Posted by </i><b>{{project.posted_by}}</b> <br>
+                        <i>on </i><b>{{project.posted_on}}</b>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            {%endfor%}
+        </div>
+    </div>
+    <a href="{%url 'post-project'%}">post new project</a>
 </body>
+
 </html>
