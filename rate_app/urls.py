@@ -10,7 +10,7 @@ urlpatterns=[
     path('review/project/post/<int:id>',views.review_post,name="review_submit"),
     path('review/project/rate/post/<int:id>',views.post_rate_view, name='post-rate'),
     path('profile/user/update',views.update_profile_view,name='update-profile'),
-    
+    path('profile/user',views.profile,name='profile'),
     
 ]
 
