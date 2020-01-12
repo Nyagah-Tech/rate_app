@@ -4,6 +4,9 @@ from django.contrib.auth import logout
 from .forms import Post_projectform,ReveiwForm,UpdateProfile,UserUpdateform
 from django.contrib import messages
 from .models import Project_Post,Profile,Reviews,Rates
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .serializer import ProfileSerializer,ProjectSerializer
 
 
 @login_required(login_url='/accounts/login/')
@@ -135,3 +138,15 @@ def search_view(request):
 def nav(request):
     current_user = request.user
     return render(request,'all/navbar.html',{"current_user":current_user})
+
+class ProfileList(APIView):
+    def get(self,request,format=None):
+        all_profiles = Profile.objects.all()
+        serializers = ProfileSerializer(all_profiles, many = True)
+        return Response(serializers.data)
+    
+class ProjectList(APIView):
+    def get(self,request,format = None):
+        all_projects = Project_Post.objects.all()
+        serializers = ProjectSerializer(all_projects,many = True)
+        return Response(serializers.data)
