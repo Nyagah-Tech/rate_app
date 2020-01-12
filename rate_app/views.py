@@ -117,3 +117,21 @@ def profile(request):
     projects = Project_Post.objects.filter(posted_by = request.user)
     
     return render(request,'all/profile.html',{"profile":profile,"projects":projects})
+
+@login_required
+def search_view(request):
+    if request.method =='POST':
+        title = request.POST['search']
+        if Project_Post.objects.filter(title = title).first() is None:
+            messages.info(request,'There is no project with that name')
+            return redirect('home')
+        else:
+            proj = get_object_or_404(Project_Post, title = title)
+            return redirect('post-rate',proj.id)
+    else:
+        messages.info(request,'Filling the input field')
+        return redirect('home')
+        
+def nav(request):
+    current_user = request.user
+    return render(request,'all/navbar.html',{"current_user":current_user})
