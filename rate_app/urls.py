@@ -11,6 +11,8 @@ urlpatterns=[
     path('review/project/rate/post/<int:id>',views.post_rate_view, name='post-rate'),
     path('profile/user/update',views.update_profile_view,name='update-profile'),
     path('profile/user',views.profile,name='profile'),
+    path('project/search',views.search_view,name="search"),
+    path('nav/',views.nav,name='nav'),
     
 ]
 
