@@ -69,6 +69,7 @@ INSTALLED_APPS = [
     'tinymce',
     'bootstrap4',
     'rate_app.apps.RateAppConfig',
+    'rest_framework',
     
 ]
 
