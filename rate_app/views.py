@@ -43,17 +43,23 @@ def post_review_view(request,id):
     desrate = []
     usarate=[]
     conrate=[]
-    for rate in rates:
-        desrate.append(rate.design)
-        usarate.append(rate.usability)
-        conrate.append(rate.content)
-    total = len(desrate)*9
-    design =round(sum(desrate)/total *100,2)
-    usability = round(sum(usarate)/total *100,2)
-    content = round(sum(conrate),2)
+    if rates:
+        for rate in rates:
+            desrate.append(rate.design)
+            usarate.append(rate.usability)
+            conrate.append(rate.content)
+        total = len(desrate)*9
+        design =round(sum(desrate)/total *100,2)
+        usability = round(sum(usarate)/total *100,2)
+        content = round(sum(conrate),2)
+        return render(request,'all/single_project.html',{"form":form,"reviews":reviews,"project":project,"project_id":id,"design":design,"usability":usability,"content":content})
+    else:
+        usability=0
+        design = 0
+        content = 0
+        return render(request,'all/single_project.html',{"form":form,"reviews":reviews,"project":project,"project_id":id,"design":design,"usability":usability,"content":content})
+
         
-    return render(request,'all/single_project.html',{"form":form,"reviews":reviews,"project":project,"project_id":id,"design":design,"usability":usability,"content":content})
- 
 @login_required   
 def review_post(request,id):
     if request.method=='POST':
@@ -91,7 +97,7 @@ def post_rate_view(request,id):
         return redirect('post-review',id)
         
 @login_required
-def update_profile_view(request,id):
+def update_profile_view(request):
     if request.method =='POST':
         form = UpdateProfile(request.POST,request.FILES,instance=request.user.profile)
         userform = UserUpdateform(request.POST,instance=request.user)
@@ -105,4 +111,9 @@ def update_profile_view(request,id):
         userform = UserUpdateform(instance=request.user)
     return render(request,"all/update_profile.html",{"form":form,"userform":userform})
         
+@login_required
+def profile(request):
+    profile = Profile.objects.filter(user = request.user)
+    projects = Project_Post.objects.filter(posted_by = request.user)
     
+    return render(request,'all/profile.html',{"profile":profile,"projects":projects})
