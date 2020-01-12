@@ -2,7 +2,9 @@
 {% load bootstrap4%}
 {%load static%}
 {% block content%}
-    <div class="row">
+<body>
+    
+    <div class="row" style="margin-top: 50px;">
         <div class="col-md-4"></div>
         <div class="col-md-4">
             {% if form.errors%}
@@ -19,6 +21,7 @@
                         <div class="form-group">
                             <input type="submit" class="btn btn-primary" value="Login">
                         </div>
+                        <input type="hidden" name="next" value="{{next}}">
                     </form>
                     <p>If you don't have an account</p>
                     <a class="nav-link btn btn-outline-danger" href="/accounts/register/">Sign Up</a>
@@ -27,4 +30,5 @@
         </div>
         <div class="col-md-4"></div>
     </div>
+</body>
     {%endblock%}
