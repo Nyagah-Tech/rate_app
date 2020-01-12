@@ -7,9 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     {% if title %}
-    <title>Instagram-{{title}}</title>
+    <title>Rate_galio-{{title}}</title>
     {% else %}
-    <title>Instagram Web Application</title>
+    <title>@Devrate web application</title>
     {% endif %}
     {% block styles %}
         {% bootstrap_css %}
@@ -17,7 +17,7 @@
     {% endblock %}
 </head>
 <body>
-    
+    {%include "all/navbar.html" %}
     {% block content %}
     {% endblock %}
     
