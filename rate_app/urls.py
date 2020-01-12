@@ -13,6 +13,8 @@ urlpatterns=[
     path('profile/user',views.profile,name='profile'),
     path('project/search',views.search_view,name="search"),
     path('nav/',views.nav,name='nav'),
+    path('api/profile/',views.ProfileList.as_view()),
+    path('api/project/',views.ProjectList.as_view()),
     
 ]
 
