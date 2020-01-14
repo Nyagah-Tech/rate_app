@@ -2,15 +2,15 @@
 {% load staticfiles %}
 {% load bootstrap4 %}
 {% block content %}
-    <h1 style="margin-top: 100px;font-size:30px">Edit your profile {{current_user}}</h1>
+    <h1 style="margin-top: 100px;font-size:30px;text-align: center;">Edit your profile {{current_user}}</h1>
     <div class="container" style="margin-top :30px">
-        <div class="edit">
-            <form action="{%url 'update-profile'%}" method = "POST" enctype="multipart/form-data">
+        <div class="card" style="background-color: rgb(70, 70, 75);color: white;">
+            <form action="{%url 'update-profile'%}" method = "POST" enctype="multipart/form-data" style="font-size: 16px;margin-top: 30px;margin-left: 30px;margin-right: 30px;margin-bottom: 30px;">
                 {% csrf_token%}
                {% bootstrap_form userform%}
                {% bootstrap_form form %}
                 
-                <input type="submit" class="btn btn-primary" value="Update">
+                <input type="submit" class="btn btn-primary" value="Update" style="width: 80px; height: 30px; font-size: 14px;">
             </form>
         </div>
     </div>
